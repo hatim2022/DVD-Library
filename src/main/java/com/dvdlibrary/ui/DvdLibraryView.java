@@ -40,7 +40,7 @@ public class DvdLibraryView {
         Dvd currentDvd = new Dvd(dvdId);
         currentDvd.setTitle(title);
         currentDvd.setReleaseDate(releaseDate);
-        currentDvd.setMpaaRating(Float.valueOf(mpaaRating));
+        currentDvd.setMpaaRating(Float.parseFloat(mpaaRating));
         currentDvd.setDirectorName(directorName);
         currentDvd.setStudio(studio);
         currentDvd.setUserNote(userNote);
@@ -66,7 +66,7 @@ public class DvdLibraryView {
     }
 
     public void displayCreateSuccessBanner() {
-        io.readString("Dvd successfully created.  Please hit enter to continue");
+        io.print("Dvd successfully created.");
     }
 
     public void displayDvdList(List<Dvd> dvdList) {
@@ -114,6 +114,10 @@ public class DvdLibraryView {
         io.print("=== Edit Dvd ===");
     }
 
+    public void displaySuccesEditDvdBanner () {
+        io.print("=== Edit Dvd ===");
+    }
+
 
     public void displaySearchDvdBanner () {
         io.print("=== Search Dvd ===");
@@ -143,44 +147,37 @@ public class DvdLibraryView {
     }
 
     public String displayAndGetEditTitleMsg() {
-        String title=io.readString("please enter the new title");
-        return title;
+        return io.readString("please enter the new title");
     }
 
 
     public String displayAndGetEditReleaseDateMsg() {
-        String releaseDate=io.readString("please enter the new Release Date");
-        return releaseDate;
+        return io.readString("please enter the new Release Date");
     }
 
     public String displayAndGetMpaaRatingMsg() {
-        String mpaaRating=io.readString("please enter the new Mpaa Rating ");
-        return mpaaRating;
+        return io.readString("please enter the new Mpaa Rating ");
     }
 
     public String displayAndGetDirectorNameMsg() {
-        String directorName=io.readString("please enter the new Director Name ");
-        return directorName;
+        return io.readString("please enter the new Director Name ");
     }
 
     public String displayAndGetDvdStudioMsg() {
-        String studioName=io.readString("please enter the new studio Name ");
-        return studioName;
+        return io.readString("please enter the new studio Name ");
     }
 
     public String displayAndGetdvdUserNoteMsg() {
-        String userNote=io.readString("please enter the new user note ");
-        return userNote;
+        return io.readString("please enter the new user note ");
     }
 
     public String getDvdTitle() {
-        String dvdTitle=io.readString("please enter the Dvd title ");
-        return dvdTitle;
+        return io.readString("please enter the Dvd title ");
     }
 
     public int displayContinueMsg() throws IOException {
         io.print("************************");
       String  x= io.readString("please enter 0 to go back to menu or 8 to exit");
-     return Integer.valueOf(x);
+     return Integer.parseInt(x);
     }
 }

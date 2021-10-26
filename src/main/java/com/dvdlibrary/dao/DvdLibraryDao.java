@@ -1,11 +1,11 @@
 package com.dvdlibrary.dao;
 
 import com.dvdlibrary.dto.Dvd;
-import com.dvdlibrary.exception.DvdLibraryDaoException;
+import com.dvdlibrary.exception.DvdLibraryPersistenceException ;
 
 import java.util.List;
 
-public interface DvdLibraryDao<T> {
+public interface DvdLibraryDao {
     /**
      * Adds the given DVD to the roster and associates it with the given
      * Dvd id. If there is already a DVD associated with the given
@@ -17,14 +17,14 @@ public interface DvdLibraryDao<T> {
      * @return the dvd object previously associated with the given
      * dvd id if it exists, null otherwise
      */
-    Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException;
+    Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryPersistenceException ;
 
     /**
      * Returns a List of all dvds in the roster.
      *
      * @return List containing all dvds in the roster.
      */
-    List<Dvd> getAllDvds() throws DvdLibraryDaoException;
+    List<Dvd> getAllDvds() throws DvdLibraryPersistenceException ;
 
     /**
      * Returns the dvd object associated with the given dvd id.
@@ -34,7 +34,7 @@ public interface DvdLibraryDao<T> {
      * @return the Dvd object associated with the given dvd id,
      * null if no such dvd exists
      */
-    Dvd getDvd(String dvdId) throws DvdLibraryDaoException;
+    Dvd getDvd(String dvdId) throws DvdLibraryPersistenceException ;
 
     /**
      * Removes from the roster the dvd associated with the given id.
@@ -45,9 +45,9 @@ public interface DvdLibraryDao<T> {
      * @return Dvd object that was removed or null if no dvd
      * was associated with the given dvd id
      */
-    Dvd removeDvd(String dvdId) throws DvdLibraryDaoException;
+    Dvd removeDvd(String dvdId) throws DvdLibraryPersistenceException ;
 
-    Dvd editDvd(String dvdId,Dvd dvd) throws DvdLibraryDaoException;
+    Dvd editDvd(String dvdId,Dvd dvd) throws DvdLibraryPersistenceException ;
 
-    Dvd getDvdByTitle(String title) throws DvdLibraryDaoException;
+    Dvd getDvdByTitle(String title) throws DvdLibraryPersistenceException ;
 }

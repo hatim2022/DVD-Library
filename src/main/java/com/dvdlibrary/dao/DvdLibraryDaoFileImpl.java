@@ -2,7 +2,7 @@ package com.dvdlibrary.dao;
 
 
 import com.dvdlibrary.dto.Dvd;
-import com.dvdlibrary.exception.DvdLibraryDaoException;
+import com.dvdlibrary.exception.DvdLibraryPersistenceException ;
 
 import java.io.*;
 import java.util.*;
@@ -28,10 +28,11 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
         String dvdId = dvdTokens[0];
 
         Dvd dvdFromFile = new Dvd(dvdId);
+        float rating=Float.parseFloat(dvdTokens[3]);
 
         dvdFromFile.setTitle(dvdTokens[1]);
         dvdFromFile.setReleaseDate(dvdTokens[2]);
-        dvdFromFile.setMpaaRating(Float.valueOf(dvdTokens[3]));
+        dvdFromFile.setMpaaRating(rating);
         dvdFromFile.setDirectorName(dvdTokens[4]);
         dvdFromFile.setStudio(dvdTokens[5]);
         dvdFromFile.setUserNote(dvdTokens[6]);
@@ -65,9 +66,9 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
      * Writes all dvds in the roster out to a ROSTER_FILE.  See loadRoster
      * for file format.
      *
-     * @throws DvdLibraryDaoException if an error occurs writing to the file
+     * @throws DvdLibraryPersistenceException  if an error occurs writing to the file
      */
-    private void writeRoster() throws DvdLibraryDaoException {
+    private void writeRoster() throws DvdLibraryPersistenceException  {
         PrintWriter out;
 
         try {
@@ -82,20 +83,20 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
             // Clean up
             out.close();
         } catch (IOException e) {
-            throw new DvdLibraryDaoException("Could not save dvd data.", e);
+            throw new DvdLibraryPersistenceException ("Could not save dvd data.", e);
         }
 
 
     }
 
 
-    private void loadRoster() throws DvdLibraryDaoException {
+    private void loadRoster() throws DvdLibraryPersistenceException  {
         Scanner scanner;
 
         try {
             scanner = new Scanner(new BufferedReader(new FileReader(ROSTER_FILE)));
         } catch (FileNotFoundException e) {
-            throw new DvdLibraryDaoException ("-_- Could not load roster data into memory.", e);
+            throw new DvdLibraryPersistenceException  ("-_- Could not load roster data into memory.", e);
         }
         String currentLine;
         Dvd currentDvd;
@@ -110,7 +111,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     }
 
     @Override
-    public Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException {
+    public Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryPersistenceException  {
         loadRoster();
         Dvd prevDvd = dvds.put(dvdId, dvd);
         writeRoster();
@@ -118,23 +119,23 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     }
 
     @Override
-    public List<Dvd> getAllDvds() throws DvdLibraryDaoException {
+    public List<Dvd> getAllDvds() throws DvdLibraryPersistenceException  {
         loadRoster();
         return new ArrayList<>(dvds.values());
     }
 
     @Override
-    public Dvd getDvd(String dvdId) throws DvdLibraryDaoException {
+    public Dvd getDvd(String dvdId) throws DvdLibraryPersistenceException  {
         loadRoster();
         return dvds.get(dvdId);
     }
 
     @Override
-    public Dvd removeDvd(String dvdId) throws DvdLibraryDaoException {
+    public Dvd removeDvd(String dvdId) throws DvdLibraryPersistenceException  {
         loadRoster();
         Dvd removedDvd = dvds.remove(dvdId);
         if(removedDvd==null){
-            throw new DvdLibraryDaoException("Dvd record not found");
+            throw new DvdLibraryPersistenceException ("Dvd record not found");
         }else {
             writeRoster();
         }
@@ -143,7 +144,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     }
 
     @Override
-    public Dvd editDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException {
+    public Dvd editDvd(String dvdId, Dvd dvd) throws DvdLibraryPersistenceException  {
         loadRoster();
         dvds.put(dvdId,dvd);
         writeRoster();
@@ -151,7 +152,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     }
 
     @Override
-    public Dvd getDvdByTitle(String title) throws DvdLibraryDaoException {
+    public Dvd getDvdByTitle(String title) throws DvdLibraryPersistenceException  {
         loadRoster();
         Iterator<Dvd> iterator=dvds.values().iterator();
         Dvd dvd=null;

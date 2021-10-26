@@ -1,7 +1,12 @@
 package com.dvdlibrary.dao;
 
 import com.dvdlibrary.dto.Dvd;
+import com.dvdlibrary.exception.DvdLibraryDuplicateIdException;
+import com.dvdlibrary.service.DvdLibraryService;
+import com.dvdlibrary.service.DvdLibraryServiceImpl;
+import org.junit.Rule;
 import org.junit.jupiter.api.*;
+import org.junit.rules.ExpectedException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DvdLibraryDaoFileImplTest {
     DvdLibraryDao testDao;
+    DvdLibraryService testService;
+    DvdLibraryAuditDao dvdLibraryAuditDao;
 
     @BeforeAll
     public static void setUpClass() {
@@ -25,10 +32,14 @@ class DvdLibraryDaoFileImplTest {
     public void setUp() {
 
         try {
+
             String testFile = "testroster.txt";
             // Use the FileWriter to quickly blank the file
             new FileWriter(testFile);
             testDao = new DvdLibraryDaoFileImpl(testFile);
+            dvdLibraryAuditDao=new DvdLibraryAuditDaoFileImpl();
+            testService=new DvdLibraryServiceImpl(testDao,dvdLibraryAuditDao);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,23 +102,105 @@ class DvdLibraryDaoFileImplTest {
         dvd2.setStudio("studio");
         dvd2.setUserNote("note1");
 
-        // Add both our students to the DAO
         testDao.addDvd(dvdId,dvd);
         testDao.addDvd(dvdId2,dvd2);
 
-        // Retrieve the list of all students within the DAO
         List<Dvd> allDvds = testDao.getAllDvds();
 
-        // First check the general contents of the list
         assertNotNull(allDvds, "The list of dvds must not null");
         assertEquals(2, allDvds.size(),"List of dvds should have 2 dvd.");
 
-        // Then the specifics
         assertTrue(testDao.getAllDvds().contains(dvd),
                 "The list of dvds should include dvd1.");
         assertTrue(testDao.getAllDvds().contains(dvd2),
                 "The list of students should include dvd2.");
 
     }
+
+    @Test
+    public void testRemoveDvd() throws Exception{
+        // Create our first Dvd
+        String dvdId = "0001";
+        Dvd dvd = new Dvd(dvdId);
+        dvd.setTitle("title1");
+        dvd.setReleaseDate("1990");
+        dvd.setMpaaRating(1.8f);
+        dvd.setDirectorName("name");
+        dvd.setStudio("studio");
+        dvd.setUserNote("note1");
+
+        // Create our second Dvd
+        String dvdId2 = "0002";
+        Dvd dvd2 = new Dvd(dvdId2);
+        dvd2.setTitle("title2");
+        dvd2.setReleaseDate("2005");
+        dvd2.setMpaaRating(1.8f);
+        dvd2.setDirectorName("name2");
+        dvd2.setStudio("studio2");
+        dvd2.setUserNote("note2");
+
+
+        testDao.addDvd(dvd.getId(),dvd);
+        testDao.addDvd(dvd2.getId(),dvd2);
+
+        Dvd removedDvd = testDao.removeDvd(dvd.getId());
+
+        assertEquals(removedDvd, dvd);
+
+        List<Dvd> allDvds = testDao.getAllDvds();
+
+        assertNotNull( allDvds, "All dvd list should be not null.");
+        assertEquals( 1, allDvds.size(), "dvds list should only have 1 dvd.");
+
+        assertFalse( allDvds.contains(dvd));
+        assertTrue( allDvds.contains(dvd2));
+
+        removedDvd = testDao.removeDvd(dvd2.getId());
+
+        assertEquals( removedDvd,dvd2);
+
+        allDvds = testDao.getAllDvds();
+
+        assertTrue( allDvds.isEmpty(), "The retrieved list of dvds should be empty.");
+
+        Dvd retrievedStudent = testDao.getDvd(dvd.getId());
+        assertNull(retrievedStudent, "Ada was removed, should be null.");
+
+        retrievedStudent = testDao.getDvd(dvd2.getId());
+        assertNull(retrievedStudent, "Charles was removed, should be null.");
+
+    }
+
+    @Test
+    public void testCreateDuplicateIdDvd() throws Exception {
+        // Create our first Dvd
+        String dvdId = "0001";
+        Dvd dvd = new Dvd(dvdId);
+        dvd.setTitle("title1");
+        dvd.setReleaseDate("1990");
+        dvd.setMpaaRating(1.8f);
+        dvd.setDirectorName("name");
+        dvd.setStudio("studio");
+        dvd.setUserNote("note1");
+
+        // Create our second Dvd
+        String dvdId2 = "0001";
+        Dvd dvd2 = new Dvd(dvdId2);
+        dvd2.setTitle("title2");
+        dvd2.setReleaseDate("2005");
+        dvd2.setMpaaRating(1.8f);
+        dvd2.setDirectorName("name2");
+        dvd2.setStudio("studio2");
+        dvd2.setUserNote("note2");
+
+        testService.createDvd(dvd.getId(),dvd);
+
+
+        Assertions.assertThrows(DvdLibraryDuplicateIdException.class, () -> testService.createDvd(dvd2.getId(),dvd2));
+
+
+    }
+
+
 
 }
