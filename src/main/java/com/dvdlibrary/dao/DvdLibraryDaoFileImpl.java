@@ -9,11 +9,18 @@ import java.util.*;
 
 public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
 
-    public static final String ROSTER_FILE = "roster.txt";
+    public static  String ROSTER_FILE = "roster.txt";
     public static final String DELIMITER = "::";
 
     private Map<String, Dvd> dvds = new HashMap<>();
 
+    public DvdLibraryDaoFileImpl() {
+        ROSTER_FILE = "roster.txt";
+    }
+
+    public DvdLibraryDaoFileImpl(String rosterTextFile) {
+        ROSTER_FILE = rosterTextFile;
+    }
 
     private Dvd unmarshallDvd(String dvdAsText){
 

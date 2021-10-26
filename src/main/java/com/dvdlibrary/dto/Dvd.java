@@ -1,6 +1,7 @@
 package com.dvdlibrary.dto;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Dvd {
     private String id;
@@ -66,5 +67,31 @@ public class Dvd {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dvd dvd = (Dvd) o;
+        return Float.compare(dvd.mpaaRating, mpaaRating) == 0 && id.equals(dvd.id) && title.equals(dvd.title) && Objects.equals(releaseDate, dvd.releaseDate) && Objects.equals(directorName, dvd.directorName) && Objects.equals(studio, dvd.studio) && Objects.equals(userNote, dvd.userNote);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, releaseDate, mpaaRating, directorName, studio, userNote);
+    }
+
+    @Override
+    public String toString() {
+        return "Dvd{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", mpaaRating=" + mpaaRating +
+                ", directorName='" + directorName + '\'' +
+                ", studio='" + studio + '\'' +
+                ", userNote='" + userNote + '\'' +
+                '}';
     }
 }
