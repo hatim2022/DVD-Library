@@ -13,7 +13,7 @@ public class UserIOConsoleImpl implements UserIO{
     @Override
     public String readString(String prompt) {
         System.out.println(prompt);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class UserIOConsoleImpl implements UserIO{
         String input;
         do {
             System.out.println(prompt);
-            input = scanner.next();
+            input = scanner.nextLine();
         }while (Integer.parseInt(input)<min || Integer.parseInt(input)>max);
         return input;
     }
