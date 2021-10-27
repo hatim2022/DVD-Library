@@ -4,9 +4,7 @@ import com.dvdlibrary.dto.Dvd;
 import com.dvdlibrary.exception.DvdLibraryDuplicateIdException;
 import com.dvdlibrary.service.DvdLibraryService;
 import com.dvdlibrary.service.DvdLibraryServiceImpl;
-import org.junit.Rule;
 import org.junit.jupiter.api.*;
-import org.junit.rules.ExpectedException;
 
 import java.io.FileWriter;
 import java.io.IOException;
