@@ -44,13 +44,17 @@ public class DvdLibraryController {
                     case 6:
                         searchDvd();
                         break;
+                    case 7:
+                        break;
                     default:
                         unknownCommand();
                         break;
                 }
-                menuSelection=view.displayContinueMsg();
+                if(menuSelection!=7) {
+                    menuSelection = view.displayContinueMsg();
+                }
 
-            } while (menuSelection != 8);
+            } while (menuSelection != 7);
             exitMessage();
         }catch (DvdLibraryPersistenceException | IOException | DvdLibraryDataValidationException | DvdLibraryDuplicateIdException e){
             view.displayErrorMessage(e.getMessage());

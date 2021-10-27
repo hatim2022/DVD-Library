@@ -177,7 +177,7 @@ public class DvdLibraryView {
 
     public int displayContinueMsg() throws IOException {
         io.print("************************");
-      String  x= io.readString("please enter 0 to go back to menu or 8 to exit");
+      String  x= io.readString("please enter 0 to go back to menu or 7 to exit");
      return Integer.parseInt(x);
     }
 }
