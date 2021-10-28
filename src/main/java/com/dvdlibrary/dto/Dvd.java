@@ -4,7 +4,6 @@ package com.dvdlibrary.dto;
 import java.util.Objects;
 
 public class Dvd {
-    private String id;
     private String title;
     private String releaseDate;
     private String mpaaRating;
@@ -12,9 +11,6 @@ public class Dvd {
     private String studio;
     private String userNote;
 
-    public Dvd(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -65,27 +61,22 @@ public class Dvd {
     }
 
 
-    public String getId() {
-        return id;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dvd dvd = (Dvd) o;
-        return dvd.mpaaRating.equals(mpaaRating) && id.equals(dvd.id) && title.equals(dvd.title) && Objects.equals(releaseDate, dvd.releaseDate) && Objects.equals(directorName, dvd.directorName) && Objects.equals(studio, dvd.studio) && Objects.equals(userNote, dvd.userNote);
+        return dvd.mpaaRating.equals(mpaaRating)  && title.equals(dvd.title) && Objects.equals(releaseDate, dvd.releaseDate) && Objects.equals(directorName, dvd.directorName) && Objects.equals(studio, dvd.studio) && Objects.equals(userNote, dvd.userNote);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, releaseDate, mpaaRating, directorName, studio, userNote);
+        return Objects.hash( title, releaseDate, mpaaRating, directorName, studio, userNote);
     }
 
     @Override
     public String toString() {
         return "Dvd{" +
-                "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", mpaaRating=" + mpaaRating +
