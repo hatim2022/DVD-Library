@@ -56,7 +56,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd = new Dvd(dvdId);
         dvd.setTitle("title1");
         dvd.setReleaseDate("1990");
-        dvd.setMpaaRating(1.8f);
+        dvd.setMpaaRating("R");
         dvd.setDirectorName("name");
         dvd.setStudio("studio");
         dvd.setUserNote("note1");
@@ -85,7 +85,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd = new Dvd(dvdId);
         dvd.setTitle("title1");
         dvd.setReleaseDate("1990");
-        dvd.setMpaaRating(1.8f);
+        dvd.setMpaaRating("R");
         dvd.setDirectorName("name");
         dvd.setStudio("studio");
         dvd.setUserNote("note1");
@@ -95,7 +95,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd2 = new Dvd(dvdId2);
         dvd2.setTitle("title1");
         dvd2.setReleaseDate("1990");
-        dvd2.setMpaaRating(1.8f);
+        dvd2.setMpaaRating("R");
         dvd2.setDirectorName("name");
         dvd2.setStudio("studio");
         dvd2.setUserNote("note1");
@@ -122,7 +122,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd = new Dvd(dvdId);
         dvd.setTitle("title1");
         dvd.setReleaseDate("1990");
-        dvd.setMpaaRating(1.8f);
+        dvd.setMpaaRating("R");
         dvd.setDirectorName("name");
         dvd.setStudio("studio");
         dvd.setUserNote("note1");
@@ -132,7 +132,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd2 = new Dvd(dvdId2);
         dvd2.setTitle("title2");
         dvd2.setReleaseDate("2005");
-        dvd2.setMpaaRating(1.8f);
+        dvd2.setMpaaRating("R");
         dvd2.setDirectorName("name2");
         dvd2.setStudio("studio2");
         dvd2.setUserNote("note2");
@@ -176,7 +176,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd = new Dvd(dvdId);
         dvd.setTitle("title1");
         dvd.setReleaseDate("1990");
-        dvd.setMpaaRating(1.8f);
+        dvd.setMpaaRating("R");
         dvd.setDirectorName("name");
         dvd.setStudio("studio");
         dvd.setUserNote("note1");
@@ -186,7 +186,7 @@ class DvdLibraryDaoFileImplTest {
         Dvd dvd2 = new Dvd(dvdId2);
         dvd2.setTitle("title2");
         dvd2.setReleaseDate("2005");
-        dvd2.setMpaaRating(1.8f);
+        dvd2.setMpaaRating("R");
         dvd2.setDirectorName("name2");
         dvd2.setStudio("studio2");
         dvd2.setUserNote("note2");

@@ -136,7 +136,7 @@ public class DvdLibraryController {
                     break;
                 case 3:
                     mpaaRating = view.displayAndGetMpaaRatingMsg();
-                    dvdToEdit.setMpaaRating(Float.parseFloat(mpaaRating));
+                    dvdToEdit.setMpaaRating(mpaaRating);
                     break;
                 case 4:
                     directorName = view.displayAndGetDirectorNameMsg();

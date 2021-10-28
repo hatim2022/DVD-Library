@@ -28,7 +28,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
         String dvdId = dvdTokens[0];
 
         Dvd dvdFromFile = new Dvd(dvdId);
-        float rating=Float.parseFloat(dvdTokens[3]);
+        String rating=dvdTokens[3];
 
         dvdFromFile.setTitle(dvdTokens[1]);
         dvdFromFile.setReleaseDate(dvdTokens[2]);

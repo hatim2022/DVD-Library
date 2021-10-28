@@ -83,7 +83,8 @@ public class DvdLibraryServiceImpl implements DvdLibraryService {
                 || dvd.getTitle().trim().length() == 0
                 || dvd.getReleaseDate() == null
                 || dvd.getReleaseDate().trim().length() == 0
-                || dvd.getMpaaRating() == 0
+                || dvd.getMpaaRating() == null
+                || dvd.getMpaaRating().trim().length() == 0
                 || dvd.getDirectorName() ==null
                 || dvd.getDirectorName().trim().length() == 0
                 || dvd.getStudio() ==null

@@ -1,13 +1,13 @@
 package com.dvdlibrary.dto;
 
-import java.util.Date;
+
 import java.util.Objects;
 
 public class Dvd {
     private String id;
     private String title;
     private String releaseDate;
-    private float mpaaRating;
+    private String mpaaRating;
     private String directorName;
     private String studio;
     private String userNote;
@@ -32,11 +32,11 @@ public class Dvd {
         this.releaseDate = releaseDate;
     }
 
-    public float getMpaaRating() {
+    public String getMpaaRating() {
         return mpaaRating;
     }
 
-    public void setMpaaRating(float mpaaRating) {
+    public void setMpaaRating(String mpaaRating) {
         this.mpaaRating = mpaaRating;
     }
 
@@ -74,7 +74,7 @@ public class Dvd {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dvd dvd = (Dvd) o;
-        return Float.compare(dvd.mpaaRating, mpaaRating) == 0 && id.equals(dvd.id) && title.equals(dvd.title) && Objects.equals(releaseDate, dvd.releaseDate) && Objects.equals(directorName, dvd.directorName) && Objects.equals(studio, dvd.studio) && Objects.equals(userNote, dvd.userNote);
+        return dvd.mpaaRating.equals(mpaaRating) && id.equals(dvd.id) && title.equals(dvd.title) && Objects.equals(releaseDate, dvd.releaseDate) && Objects.equals(directorName, dvd.directorName) && Objects.equals(studio, dvd.studio) && Objects.equals(userNote, dvd.userNote);
     }
 
     @Override

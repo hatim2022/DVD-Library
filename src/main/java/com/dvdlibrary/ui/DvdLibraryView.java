@@ -40,7 +40,7 @@ public class DvdLibraryView {
         Dvd currentDvd = new Dvd(dvdId);
         currentDvd.setTitle(title);
         currentDvd.setReleaseDate(releaseDate);
-        currentDvd.setMpaaRating(Float.parseFloat(mpaaRating));
+        currentDvd.setMpaaRating(mpaaRating);
         currentDvd.setDirectorName(directorName);
         currentDvd.setStudio(studio);
         currentDvd.setUserNote(userNote);
