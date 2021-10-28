@@ -20,14 +20,14 @@ public class DvdLibraryServiceImpl implements DvdLibraryService {
     }
 
     @Override
-    public void createDvd(String dvdId,Dvd dvd) throws DvdLibraryPersistenceException , DvdLibraryDuplicateIdException, DvdLibraryDataValidationException {
-        if (dao.getDvd(dvdId) != null) {
+    public void createDvd(String dvdTitle,Dvd dvd) throws DvdLibraryPersistenceException , DvdLibraryDuplicateIdException, DvdLibraryDataValidationException {
+        if (dao.getDvd(dvdTitle) != null) {
             throw new DvdLibraryDuplicateIdException(
-                    "ERROR: Could not create Dvd. Dvd Id " + dvd.getId() + " already exists");
+                    "ERROR: Could not create Dvd. Dvd title " + dvd.getTitle() + " already exists");
         }
         validateDvdData(dvd);
-        dao.addDvd(dvdId,dvd);
-        auditDao.writeAuditEntry("Dvd " + dvd.getId() + " CREATED.");
+        dao.addDvd(dvdTitle,dvd);
+        auditDao.writeAuditEntry("Dvd " + dvd.getTitle() + " CREATED.");
     }
 
     @Override
@@ -49,20 +49,21 @@ public class DvdLibraryServiceImpl implements DvdLibraryService {
     public Dvd deleteDvd(String dvdId) throws DvdLibraryPersistenceException {
 
         Dvd removedDvd= dao.removeDvd(dvdId);
-        auditDao.writeAuditEntry("Dvd " + removedDvd.getId() + " REMOVED.");
+        auditDao.writeAuditEntry("Dvd " + removedDvd.getTitle() + " REMOVED.");
 
         return removedDvd;
     }
 
     @Override
-    public void editDvd(String dvdId,Dvd dvdToEdit) throws DvdLibraryPersistenceException , DvdLibraryDataValidationException {
-        Dvd editedDvd= dao.getDvd(dvdId);
+    public void editDvd(String dvdTitle,Dvd dvdToEdit) throws DvdLibraryPersistenceException , DvdLibraryDataValidationException {
 
+        Dvd editedDvd= dao.getDvd(dvdTitle);
         if(editedDvd==null){
             throw new DvdLibraryPersistenceException("Dvd not found");
         }
+        dao.removeDvd(dvdTitle);
         validateDvdData(dvdToEdit);
-        dao.editDvd(dvdId,dvdToEdit);
+        dao.editDvd(dvdToEdit);
 
     }
 

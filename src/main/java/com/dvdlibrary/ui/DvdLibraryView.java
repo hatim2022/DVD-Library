@@ -17,10 +17,9 @@ public class DvdLibraryView {
         io.print("Main Menu");
         io.print("1. List Dvds");
         io.print("2. Add New Dvd");
-        io.print("3. View a Dvd");
+        io.print("3. get Dvd by title");
         io.print("4. Remove a Dvd");
         io.print("5. Edit a Dvd");
-        io.print("6. Search a Dvd by Title");
         io.print("7. Exit");
 
         return io.readString("Please select from the above choices.", 1, 7);
@@ -29,7 +28,6 @@ public class DvdLibraryView {
     public Dvd getNewDvdInfo() {
 
 
-        String dvdId = io.readString("Please enter Dvd ID");
         String title = io.readString("Please enter Dvd title");
         String releaseDate = io.readString("Please enter the Dvd releaseDate");
         String mpaaRating = io.readString("Please enter Dvd mpaaRating");
@@ -37,8 +35,7 @@ public class DvdLibraryView {
         String studio = io.readString("Please enter Dvd Studio");
         String userNote = io.readString("Please enter Dvd user Note");
 
-        Dvd currentDvd = new Dvd(dvdId);
-        currentDvd.setTitle(title);
+        Dvd currentDvd = new Dvd(title);
         currentDvd.setReleaseDate(releaseDate);
         currentDvd.setMpaaRating(mpaaRating);
         currentDvd.setDirectorName(directorName);
@@ -80,14 +77,13 @@ public class DvdLibraryView {
         io.print("=== Display Dvd ===");
     }
 
-    public String getDvdIdChoice() {
-        return io.readString("Please enter the Dvd ID.");
+    public String getDvdTitleChoice() {
+        return io.readString("Please enter the Dvd Title.");
     }
 
     public void displayDvd(Dvd dvd) {
         if (dvd != null) {
-            String dvdInfo = String.format("#%s : %s | %s | %s | %s | %s | %s",
-                    dvd.getId(),
+            String dvdInfo = String.format("#%s : %s | %s | %s | %s | %s ",
                     dvd.getTitle(),
                     dvd.getReleaseDate(),
                     dvd.getMpaaRating(),

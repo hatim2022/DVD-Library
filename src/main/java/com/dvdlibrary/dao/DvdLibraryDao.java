@@ -47,7 +47,7 @@ public interface DvdLibraryDao {
      */
     Dvd removeDvd(String dvdId) throws DvdLibraryPersistenceException ;
 
-    Dvd editDvd(String dvdId,Dvd dvd) throws DvdLibraryPersistenceException ;
+    Dvd editDvd(Dvd dvd) throws DvdLibraryPersistenceException ;
 
     Dvd getDvdByTitle(String title) throws DvdLibraryPersistenceException ;
 }

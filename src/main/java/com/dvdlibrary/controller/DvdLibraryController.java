@@ -41,9 +41,6 @@ public class DvdLibraryController {
                     case 5:
                         editDvd();
                         break;
-                    case 6:
-                        searchDvd();
-                        break;
                     case 7:
                         break;
                     default:
@@ -69,7 +66,7 @@ public class DvdLibraryController {
         do {
             Dvd currentDvd = view.getNewDvdInfo();
             try {
-                service.createDvd(currentDvd.getId(),currentDvd);
+                service.createDvd(currentDvd.getTitle(),currentDvd);
                 view.displayCreateSuccessBanner();
                 hasErrors = false;
             } catch (DvdLibraryDuplicateIdException | DvdLibraryDataValidationException e) {
@@ -95,8 +92,8 @@ public class DvdLibraryController {
     private void viewDvd() throws DvdLibraryPersistenceException,
             DvdLibraryDataValidationException, DvdLibraryDuplicateIdException {
         view.displayDisplayDvdBanner();
-        String dvdId = view.getDvdIdChoice();
-        Dvd dvd = service.getDvd(dvdId);
+        String dvdTitle = view.getDvdTitleChoice();
+        Dvd dvd = service.getDvd(dvdTitle);
         if(dvd!=null) {
             view.displayDvd(dvd);
         }else {
@@ -108,16 +105,16 @@ public class DvdLibraryController {
             DvdLibraryDataValidationException, DvdLibraryDuplicateIdException {
 
         view.displayRemoveDvdBanner();
-        String dvdId = view.getDvdIdChoice();
-        Dvd removedDvd = service.deleteDvd(dvdId);
+        String dvdTitle = view.getDvdTitleChoice();
+        Dvd removedDvd = service.deleteDvd(dvdTitle);
         view.displayRemoveResult(removedDvd);
 
     }
 
     private void editDvd() throws DvdLibraryPersistenceException, DvdLibraryDataValidationException, DvdLibraryDuplicateIdException {
         view.displayEditDvdBanner();
-        String dvdId=view.getDvdIdChoice();
-        Dvd dvdToEdit= service.getDvd(dvdId);
+        String dvdTitle=view.getDvdTitleChoice();
+        Dvd dvdToEdit= service.getDvd(dvdTitle);
         String title,releaseDate,mpaaRating,directorName,studio,userNote;
 
         if(dvdToEdit==null){
@@ -155,7 +152,7 @@ public class DvdLibraryController {
                     break;
             }
 
-            service.editDvd(dvdId, dvdToEdit);
+            service.editDvd(dvdTitle, dvdToEdit);
             view.displaySuccesEditDvdBanner();
         }
 

@@ -25,17 +25,15 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     private Dvd unmarshallDvd(String dvdAsText){
 
         String[] dvdTokens = dvdAsText.split(DELIMITER);
-        String dvdId = dvdTokens[0];
+        String dvdTitle = dvdTokens[0];
 
-        Dvd dvdFromFile = new Dvd(dvdId);
-        String rating=dvdTokens[3];
+        Dvd dvdFromFile = new Dvd(dvdTitle);
 
-        dvdFromFile.setTitle(dvdTokens[1]);
-        dvdFromFile.setReleaseDate(dvdTokens[2]);
-        dvdFromFile.setMpaaRating(rating);
-        dvdFromFile.setDirectorName(dvdTokens[4]);
-        dvdFromFile.setStudio(dvdTokens[5]);
-        dvdFromFile.setUserNote(dvdTokens[6]);
+        dvdFromFile.setReleaseDate(dvdTokens[1]);
+        dvdFromFile.setMpaaRating(dvdTokens[2]);
+        dvdFromFile.setDirectorName(dvdTokens[3]);
+        dvdFromFile.setStudio(dvdTokens[4]);
+        dvdFromFile.setUserNote(dvdTokens[5]);
 
 
         return dvdFromFile;
@@ -43,9 +41,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
 
     private String marshallDvd(Dvd dvd){
 
-        String dvdAsText = dvd.getId() + DELIMITER;
-
-        dvdAsText += dvd.getTitle() + DELIMITER;
+        String dvdAsText = dvd.getTitle() + DELIMITER;
 
         dvdAsText += dvd.getReleaseDate() + DELIMITER;
 
@@ -104,7 +100,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentDvd = unmarshallDvd(currentLine);
-            dvds.put(currentDvd.getId(), currentDvd);
+            dvds.put(currentDvd.getTitle(), currentDvd);
         }
         // close scanner
         scanner.close();
@@ -144,9 +140,9 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
     }
 
     @Override
-    public Dvd editDvd(String dvdId, Dvd dvd) throws DvdLibraryPersistenceException  {
+    public Dvd editDvd( Dvd dvd) throws DvdLibraryPersistenceException  {
         loadRoster();
-        dvds.put(dvdId,dvd);
+        dvds.put(dvd.getTitle(),dvd);
         writeRoster();
         return dvd;
     }
