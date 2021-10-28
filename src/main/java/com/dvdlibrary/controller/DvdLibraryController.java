@@ -50,9 +50,8 @@ public class DvdLibraryController {
                         unknownCommand();
                         break;
                 }
-                if(menuSelection!=7) {
-                    menuSelection = view.displayContinueMsg();
-                }
+                if(menuSelection!=7)
+                 view.displayContinueMsg();
 
             } while (menuSelection != 7);
             exitMessage();

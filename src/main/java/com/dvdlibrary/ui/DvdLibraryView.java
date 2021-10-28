@@ -175,9 +175,11 @@ public class DvdLibraryView {
         return io.readString("please enter the Dvd title ");
     }
 
-    public int displayContinueMsg() throws IOException {
+    public void displayContinueMsg() throws IOException {
         io.print("************************");
-      String  x= io.readString("please enter 0 to go back to menu or 7 to exit");
-     return Integer.parseInt(x);
+        io.readString("please hit enter to continue");
     }
+
+
+
 }
