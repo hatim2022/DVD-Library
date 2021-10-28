@@ -15,12 +15,13 @@ public class DvdLibraryAuditDaoFileImpl implements DvdLibraryAuditDao{
 
         try {
             out = new PrintWriter(new FileWriter(AUDIT_FILE, true));
+            LocalDateTime timestamp = LocalDateTime.now();
+            out.println(timestamp + " : " + entry);
+            out.flush();
         } catch (IOException e) {
             throw new DvdLibraryPersistenceException("Could not persist audit information.", e);
         }
 
-        LocalDateTime timestamp = LocalDateTime.now();
-        out.println(timestamp + " : " + entry);
-        out.flush();
+
     }
 }
