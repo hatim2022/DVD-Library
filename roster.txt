@@ -1,7 +1,3 @@
-ppp::2018::R::director::studio::note::
-newtitle::2021::G::robert::alpha::good movie::
-wonderland::2004::G::jeff::disney::best movie for kids::
-catch me if u can::2011::G::smith::californiaS::best movie for adults::
-newone::2018::R::director::studio::note::
-jackie::date1::r::name::studio::n::
-opppat::2018::R::director::studio::note::
+catch me if u can::2020::G::smith::californiaS::best movie for adults::
+lili::2020::R::jeff::disney::best movie for kids::
+koko::2020::R::jeff::disney::best movie for kids::

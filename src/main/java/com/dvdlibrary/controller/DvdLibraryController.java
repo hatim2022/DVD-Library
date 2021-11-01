@@ -43,6 +43,30 @@ public class DvdLibraryController {
                         break;
                     case 7:
                         break;
+                    case 8:
+                        getMovieInLastNYears();
+                        break;
+                    case 9:
+                        getMovieWithMpaaRating();
+                        break;
+                    case 10:
+                        getMovieByDirector();
+                        break;
+                    case 11:
+                        getMovieByStudio();
+                        break;
+                    case 12:
+                        getAverageAgeMovie();
+                        break;
+                    case 13:
+                        getTheNewestMovie();
+                        break;
+                    case 14:
+                        getTheOldestMovie();
+                        break;
+                    case 15:
+                        getAverageNumberOfNote();
+                        break;
                     default:
                         unknownCommand();
                         break;
@@ -57,6 +81,80 @@ public class DvdLibraryController {
         }
 
     }
+
+    private void getAverageNumberOfNote() throws DvdLibraryPersistenceException {
+        view.displayOldestMovieBanner();
+
+        Double d=service.getAverageNumberOfNoteMovie();
+
+        view.displayAvgNumberOfNote(d);
+    }
+
+    private void getTheOldestMovie() throws DvdLibraryPersistenceException {
+        view.displayOldestMovieBanner();
+
+        Dvd dvd=service.getOldestMovie();
+
+        view.displayDvd(dvd);
+    }
+
+    private void getTheNewestMovie() throws DvdLibraryPersistenceException {
+
+        view.displayNewestMovieBanner();
+
+        Dvd dvd=service.getNewestMovie();
+
+        view.displayDvd(dvd);
+    }
+
+    private void getAverageAgeMovie() throws DvdLibraryPersistenceException {
+
+        view.displayAverageAgeMovieBanner();
+
+       double d = service.getAverageAge();
+
+       view.displayAverageAgeMovie(d);
+
+
+    }
+
+    private void getMovieByStudio() throws DvdLibraryPersistenceException {
+
+        String studio=view.displayAndGetMovieWithStudioName();
+
+        List<Dvd> dvds=service.getMovieByStudio(studio);
+
+        view.displayDvdList(dvds);
+
+    }
+
+    private void getMovieByDirector() throws DvdLibraryPersistenceException {
+        String director=view.displayAndGetMovieWithDirectorName();
+
+        List<Dvd> dvds=service.getMovieByDirectorName(director);
+
+        view.displayDvdList(dvds);
+
+    }
+
+    private void getMovieWithMpaaRating() throws DvdLibraryPersistenceException {
+        String rating=view.displayAndGetMpaaRatingMsg();
+
+        List<Dvd> dvds=service.getMovieByMpaa(rating);
+
+        view.displayDvdList(dvds);
+
+    }
+
+    private void getMovieInLastNYears() throws DvdLibraryPersistenceException {
+     int year=Integer.parseInt(view.displayAndGetMovieInLastNYears());
+
+     List<Dvd> dvds=service.getMovieInLastNYears(year);
+
+     view.displayDvdList(dvds);
+
+    }
+
 
     private void createDvd() throws DvdLibraryPersistenceException,
             DvdLibraryDataValidationException, DvdLibraryDuplicateIdException {
@@ -159,13 +257,6 @@ public class DvdLibraryController {
     }
 
 
-
-    private void searchDvd() throws DvdLibraryPersistenceException, DvdLibraryDataValidationException, DvdLibraryDuplicateIdException {
-        view.displaySearchDvdBanner();
-        String title = view.getDvdTitle();
-        Dvd dvd= service.listDvdBytitle(title);
-        view.displayDvd(dvd);
-    }
 
     private void unknownCommand() {
         view.displayUnknownCommandBanner();

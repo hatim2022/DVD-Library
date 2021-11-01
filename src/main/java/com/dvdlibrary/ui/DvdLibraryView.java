@@ -22,7 +22,19 @@ public class DvdLibraryView {
         io.print("5. Edit a Dvd");
         io.print("7. Exit");
 
-        return io.readString("Please select from the above choices.", 1, 7);
+
+        io.print("8. Find all movies released in the last N years");
+        io.print("9. Find all the movies with a given MPAA rating");
+        io.print("10. Find all the movies by a given director");
+        io.print("11. Find all the movies released by a particular studio");
+        io.print("12. Find the average age of the movies in the collection");
+        io.print("13. Find the newest movie in your collection");
+        io.print("14. Find the oldest movie in your collection");
+        io.print("15. Find the average number of notes associated with movies in your collection");
+
+
+
+        return io.readString("Please select from the above choices.", 1, 15);
     }
 
     public Dvd getNewDvdInfo() {
@@ -174,6 +186,52 @@ public class DvdLibraryView {
     public void displayContinueMsg() throws IOException {
         io.print("************************");
         io.readString("please hit enter to continue");
+    }
+
+
+    public String displayAndGetMovieInLastNYears() {
+        io.print("************************");
+        io.print(" Find all movies released in the last N years ");
+       return io.readString("please enter the year number ");
+    }
+
+    public String displayAndGetMovieWithMpaaRating() {
+        io.print("************************");
+        io.print(" Find all movies with Mpaa Rating ");
+        return io.readString("please enter the Mpaa Rating ");
+    }
+
+
+    public String displayAndGetMovieWithDirectorName() {
+        io.print("************************");
+        io.print(" Find all movies with director name ");
+        return io.readString("please enter the director name ");
+    }
+
+    public String displayAndGetMovieWithStudioName() {
+        io.print("************************");
+        io.print(" Find all movies with studio name ");
+        return io.readString("please enter the studio name ");
+    }
+
+    public void displayAverageAgeMovieBanner(){
+        io.print("Average age movie :");
+    }
+
+    public void displayAverageAgeMovie(Double d){
+        io.print("average age of movies "+d);
+    }
+
+    public void displayNewestMovieBanner() {
+        io.print("the Newest Movie is : ");
+    }
+
+    public void displayOldestMovieBanner() {
+        io.print("the Oldest Movie is : ");
+    }
+
+    public void displayAvgNumberOfNote(Double d) {
+        io.print("the avg number of note is : "+d);
     }
 
 

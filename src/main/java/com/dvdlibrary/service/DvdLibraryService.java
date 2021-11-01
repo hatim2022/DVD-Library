@@ -14,4 +14,15 @@ public interface DvdLibraryService {
     Dvd deleteDvd(String dvdId) throws DvdLibraryPersistenceException ;
     void editDvd(String dvdId,Dvd dvdToEdit) throws DvdLibraryPersistenceException , DvdLibraryDataValidationException;
     Dvd listDvdBytitle(String title) throws DvdLibraryPersistenceException ;
+
+
+    List<Dvd> getMovieInLastNYears(int n) throws DvdLibraryPersistenceException;
+    List<Dvd> getMovieByMpaa(String mpaaRate) throws DvdLibraryPersistenceException;
+    List<Dvd> getMovieByDirectorName(String directorName) throws DvdLibraryPersistenceException;
+    List<Dvd> getMovieByStudio(String studio) throws DvdLibraryPersistenceException;
+    double getAverageAge() throws DvdLibraryPersistenceException;
+    Dvd getNewestMovie() throws DvdLibraryPersistenceException;
+    Dvd getOldestMovie() throws DvdLibraryPersistenceException;
+    double getAverageNumberOfNoteMovie() throws DvdLibraryPersistenceException;
+
 }

@@ -5,7 +5,9 @@ import com.dvdlibrary.dto.Dvd;
 import com.dvdlibrary.exception.DvdLibraryPersistenceException ;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
 
@@ -159,6 +161,89 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao {
             }
         }
         return dvd;
+    }
+
+    @Override
+    public List<Dvd> getMovieInLastNYears(int n) throws DvdLibraryPersistenceException {
+        loadRoster();
+        List<Dvd> list=new ArrayList<>(dvds.values());
+
+
+    return list.stream().filter( (dvd) -> (Integer.parseInt(dvd.getReleaseDate())) > ((LocalDate.now().getYear() - n))).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Dvd> getMovieByMpaa(String mpaaRate) throws DvdLibraryPersistenceException {
+        loadRoster();
+        List<Dvd> list=new ArrayList<>(dvds.values());
+        return list.stream().filter(dvd -> dvd.getMpaaRating().equalsIgnoreCase(mpaaRate) ).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Dvd> getMovieByDirectorNAME(String directorName) throws DvdLibraryPersistenceException {
+        loadRoster();
+        List<Dvd> list=new ArrayList<>(dvds.values());
+        return list.stream().filter(dvd -> dvd.getDirectorName().equalsIgnoreCase(directorName) ).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Dvd> getMovieByStudio(String studio) throws DvdLibraryPersistenceException {
+        loadRoster();
+        List<Dvd> list=new ArrayList<>(dvds.values());
+        return list.stream().filter(dvd -> dvd.getStudio().equalsIgnoreCase(studio) ).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public double getAverageAge() throws DvdLibraryPersistenceException {
+
+        loadRoster();
+     OptionalDouble avgAge=dvds.values().
+             stream().
+             mapToDouble(dvd -> Double.parseDouble(dvd.getReleaseDate())).
+             average();
+
+     return LocalDate.now().getYear()-avgAge.getAsDouble();
+     }
+
+    @Override
+    public Dvd getNewestMovie() throws DvdLibraryPersistenceException {
+
+        loadRoster();
+        int max=dvds.values().stream()
+                .mapToInt(value ->  Integer.parseInt( value.getReleaseDate() ))
+                .max().
+                getAsInt();
+
+        Dvd dvd = dvds.values().stream()
+                .filter(dvd1 -> Integer.parseInt(dvd1.getReleaseDate()) == max).
+                findFirst().get();
+
+      return dvd;
+    }
+
+    @Override
+    public Dvd getOldestMovie() throws DvdLibraryPersistenceException {
+        loadRoster();
+        int min=dvds.values().stream()
+                .mapToInt(value ->  Integer.parseInt( value.getReleaseDate() ))
+                .min().
+                getAsInt();
+
+        Dvd dvd = dvds.values().stream()
+                .filter(dvd1 -> Integer.parseInt(dvd1.getReleaseDate()) == min).
+                findFirst().get();
+
+        return dvd;
+    }
+
+    @Override
+    public double getAverageNumberOfNoteMovie() throws DvdLibraryPersistenceException {
+        loadRoster();
+       return 1;
     }
 
 }

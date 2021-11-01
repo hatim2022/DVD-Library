@@ -99,4 +99,50 @@ public class DvdLibraryServiceImpl implements DvdLibraryService {
     }
 
 
+
+
+    @Override
+    public List<Dvd> getMovieInLastNYears(int n) throws DvdLibraryPersistenceException {
+        return dao.getMovieInLastNYears(n);
+    }
+
+    @Override
+    public List<Dvd> getMovieByMpaa(String mpaaRate) throws DvdLibraryPersistenceException {
+        return dao.getMovieByMpaa(mpaaRate);
+    }
+
+    @Override
+    public List<Dvd> getMovieByDirectorName(String directorName) throws DvdLibraryPersistenceException {
+        return dao.getMovieByDirectorNAME(directorName);
+    }
+
+    @Override
+    public List<Dvd> getMovieByStudio(String studio) throws DvdLibraryPersistenceException {
+        return dao.getMovieByStudio(studio);
+    }
+
+    @Override
+    public double getAverageAge() throws DvdLibraryPersistenceException {
+        return dao.getAverageAge();
+    }
+
+    @Override
+    public Dvd getNewestMovie() throws DvdLibraryPersistenceException {
+
+        return dao.getNewestMovie();
+    }
+
+    @Override
+    public Dvd getOldestMovie() throws DvdLibraryPersistenceException {
+
+        return dao.getOldestMovie();
+    }
+
+    @Override
+    public double getAverageNumberOfNoteMovie() throws DvdLibraryPersistenceException {
+
+        return dao.getAverageNumberOfNoteMovie();
+    }
+
+
 }
